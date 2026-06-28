@@ -232,3 +232,7 @@ klopp-frontend/
 | Vite | 8 | Bundler y servidor de desarrollo |
 | CSS Modules | — | Estilos encapsulados por componente |
 | oxlint | 1 | Linter de JavaScript/JSX |
+
+## 📄 Licencia
+
+© 2026 [gonzaloPalma22](https://github.com/gonzaloPalma22). Todos los derechos reservados.
