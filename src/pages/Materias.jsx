@@ -80,7 +80,7 @@ export default function Materias() {
     }
   };
 
-  const handleLogout = () => { logout(); navigate('/login'); };
+  const handleLogout = () => { logout(); navigate('/'); };
 
   return (
     <div className={styles.wrapper}>
@@ -118,7 +118,7 @@ export default function Materias() {
         <div className={styles.headerGlow} />
         <div className={styles.headerInner}>
           <h1 className={styles.pageTitle}>Mis materias</h1>
-          <p className={styles.pageSubtitle}>Organiza tus apuntes por materia</p>
+          <p className={styles.pageSubtitle}>Crea tus materias y sube tus PDFs para resumirlos al instante.</p>
         </div>
       </div>
 

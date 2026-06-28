@@ -13,6 +13,7 @@ export default function Apuntes() {
   const [loading, setLoading]             = useState(false);
   const [error, setError]                 = useState('');
   const [apunteAbierto, setApunteAbierto] = useState(null);
+  const [resumenLight, setResumenLight]   = useState(false);   // ← toggle modo lectura
   const [dropdownOpen, setDropdownOpen]   = useState(false);
   const [menuAbierto, setMenuAbierto]     = useState(null);
   const [modalEditar, setModalEditar]     = useState(null);
@@ -105,6 +106,15 @@ export default function Apuntes() {
     }
   };
 
+  const toggleApunte = (a) => {
+    if (apunteAbierto?.id === a.id) {
+      setApunteAbierto(null);
+    } else {
+      setApunteAbierto(a);
+      setResumenLight(false); // resetear modo al abrir nuevo resumen
+    }
+  };
+
   const handleLogout = () => { logout(); navigate('/login'); };
 
   return (
@@ -186,10 +196,23 @@ export default function Apuntes() {
               {loading ? 'Procesando...' : 'Subir'}
             </button>
           </form>
+
+          {/* Animación de carga IA */}
           {loading && (
-            <p className={styles.loadingMsg}>
-              Generando resumen con IA, esto puede tomar unos segundos...
-            </p>
+            <div className={styles.loadingCard}>
+              <div className={styles.loadingDots}>
+                <span className={styles.loadingDot} />
+                <span className={styles.loadingDot} />
+                <span className={styles.loadingDot} />
+              </div>
+              <div className={styles.loadingTextWrap}>
+                <p className={styles.loadingTitle}>Generando resumen con IA</p>
+                <p className={styles.loadingMsg}>Analizando tu PDF, esto puede tomar unos segundos…</p>
+                <div className={styles.loadingBar}>
+                  <div className={styles.loadingBarFill} />
+                </div>
+              </div>
+            </div>
           )}
         </div>
 
@@ -214,7 +237,7 @@ export default function Apuntes() {
                   <div className={styles.cardActions}>
                     <button
                       className={styles.resumeBtn}
-                      onClick={() => setApunteAbierto(apunteAbierto?.id === a.id ? null : a)}
+                      onClick={() => toggleApunte(a)}
                     >
                       {apunteAbierto?.id === a.id ? 'Ocultar resumen' : 'Ver resumen'}
                     </button>
@@ -244,10 +267,22 @@ export default function Apuntes() {
                     </div>
                   </div>
                 </div>
+
+                {/* Resumen con toggle de modo */}
                 {apunteAbierto?.id === a.id && (
-                  <div className={styles.resumen}>
-                    <p className={styles.resumenLabel}>Resumen generado por IA</p>
-                    <p className={styles.resumenText}>{a.resumen}</p>
+                  <div className={`${styles.resumen} ${resumenLight ? styles.resumenLight : ''}`}>
+                    <div className={styles.resumenHeader}>
+                      <p className={styles.resumenLabel}>Resumen generado por IA</p>
+                      <button
+                        className={styles.resumenModeToggle}
+                        onClick={() => setResumenLight(!resumenLight)}
+                      >
+                        {resumenLight ? '🌙 Modo oscuro' : '☀️ Modo claro'}
+                      </button>
+                    </div>
+                    <div className={styles.resumenBody}>
+                      <p className={styles.resumenText}>{a.resumen}</p>
+                    </div>
                   </div>
                 )}
               </div>

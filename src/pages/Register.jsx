@@ -27,109 +27,86 @@ export default function Register() {
 
   return (
     <div className={styles.wrapper}>
-
-      {/* Panel izquierdo */}
-      <div className={styles.panelLeft}>
-        <div className={styles.grid} />
-        <div className={styles.glow} />
-        <div className={styles.panelContent}>
-          <div className={styles.logo}>
-            Klopp<span className={styles.logoAccent}>IA</span>
-          </div>
-          <h2 className={styles.heading}>
-            Empieza a estudiar
-            <br />
-            <span className={styles.headingAccent}>de forma inteligente.</span>
-          </h2>
-          <p className={styles.description}>
-            Crea tu cuenta y comienza a organizar tus apuntes con el poder de la IA.
-          </p>
-          <div className={styles.poweredBy}>
-            <div className={styles.dot} />
-            <span className={styles.poweredByText}>Powered by Gemini AI</span>
-          </div>
+      <div className={styles.card}>
+        {/* CORRECCIÓN: Se cambió <link> por <Link> */}
+        <Link to="/" className={styles.logo}>
+          Klopp<span className={styles.logoAccent}>IA</span>
+        </Link>
+        <div className={styles.formHeader}>
+          <h1 className={styles.formTitle}>Crear cuenta</h1>
+          <p className={styles.formSubtitle}>Completa tus datos para registrarte</p>
         </div>
-      </div>
 
-      {/* Panel derecho */}
-      <div className={styles.panelRight}>
-        <div className={styles.formWrapper}>
-          <div className={styles.formHeader}>
-            <h1 className={styles.formTitle}>Crear cuenta</h1>
-            <p className={styles.formSubtitle}>Completa tus datos para registrarte</p>
-          </div>
+        {error && <div className="alert alert-error">{error}</div>}
 
-          {error && <div className="alert alert-error">{error}</div>}
-
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.row}>
-              <div className="form-group" style={{ flex: 1 }}>
-                <label className="form-label">Nombre</label>
-                <input
-                  className="input"
-                  name="nombre"
-                  placeholder="Juan"
-                  value={form.nombre}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group" style={{ flex: 1 }}>
-                <label className="form-label">Apellido</label>
-                <input
-                  className="input"
-                  name="apellido"
-                  placeholder="Pérez"
-                  value={form.apellido}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Correo electrónico</label>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.row}>
+            <div className="form-group" style={{ flex: 1 }}>
+              <label className="form-label">Nombre</label>
               <input
                 className="input"
-                name="email"
-                type="email"
-                placeholder="tu@correo.com"
-                value={form.email}
+                name="nombre"
+                placeholder="Juan"
+                value={form.nombre}
                 onChange={handleChange}
                 required
               />
             </div>
-
-            <div className="form-group">
-              <label className="form-label">Contraseña</label>
+            <div className="form-group" style={{ flex: 1 }}>
+              <label className="form-label">Apellido</label>
               <input
                 className="input"
-                name="password"
-                type="password"
-                placeholder="••••••••"
-                value={form.password}
+                name="apellido"
+                placeholder="Pérez"
+                value={form.apellido}
                 onChange={handleChange}
                 required
               />
             </div>
+          </div>
 
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={loading}
-            >
-              {loading ? 'Creando cuenta...' : 'Crear cuenta'}
-            </button>
-          </form>
+          <div className="form-group">
+            <label className="form-label">Correo electrónico</label>
+            <input
+              className="input"
+              name="email"
+              type="email"
+              placeholder="tu@correo.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <p className={styles.footer}>
-            ¿Ya tienes cuenta?{' '}
-            <Link to="/login" className={styles.footerLink}>
-              Iniciar sesión
-            </Link>
-          </p>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Contraseña</label>
+            <input
+              className="input"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className={styles.submitBtn}
+            disabled={loading}
+          >
+            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+          </button>
+        </form>
+
+        <p className={styles.footer}>
+          ¿Ya tienes cuenta?{' '}
+          <Link to="/login" className={styles.footerLink}>
+            Iniciar sesión
+          </Link>
+        </p>
       </div>
-    </div>
+    </div> 
   );
 }

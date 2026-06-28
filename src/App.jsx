@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Materias from './pages/Materias';
@@ -21,9 +22,9 @@ const AdminRoute = ({ children }) => {
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
-      <Route path="/" element={<Navigate to="/materias" />} />
       <Route path="/materias" element={<PrivateRoute><Materias /></PrivateRoute>} />
       <Route path="/materias/:id/apuntes" element={<PrivateRoute><Apuntes /></PrivateRoute>} />
       <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
